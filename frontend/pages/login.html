@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JUMP - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d59f2",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#000000",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "1.25rem", // 20px squircle-like
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom squircle radius for Apple feel */
+        .squircle-radius {
+            border-radius: 20px;
+        }
+        body {
+            background-color: #000000;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-dark font-display text-white antialiased">
+<div class="flex min-h-screen w-full flex-col items-center justify-between px-6 py-12">
+<!-- Header / Logo -->
+<div class="mt-8 flex flex-col items-center gap-2">
+<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary">
+<span class="text-2xl font-black tracking-tighter">J</span>
+</div>
+<h1 class="text-2xl font-bold tracking-[0.2em] uppercase mt-2">Jump</h1>
+</div>
+<!-- Form Section -->
+<div class="w-full max-w-[400px] flex flex-col gap-4 mt-8">
+<div class="flex flex-col gap-4">
+<!-- Email Field -->
+<div class="flex flex-col gap-1.5">
+<label class="px-1 text-sm font-medium text-gray-400">E-mail</label>
+<input id="email" class="w-full h-14 bg-[#1c1c1e] border border-gray-800 focus:border-primary focus:ring-1 focus:ring-primary text-white squircle-radius px-4 placeholder:text-gray-600 transition-all outline-none" placeholder="seu@email.com" type="email" required/>
+</div>
+<!-- Password Field -->
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between items-center px-1">
+<label class="text-sm font-medium text-gray-400">Senha</label>
+<a href="recovery.html" class="text-xs text-primary font-medium hover:underline">Esqueceu?</a>
+</div>
+<div class="relative">
+<input id="password" class="w-full h-14 bg-[#1c1c1e] border border-gray-800 focus:border-primary focus:ring-1 focus:ring-primary text-white squircle-radius px-4 pr-12 placeholder:text-gray-600 transition-all outline-none" placeholder="••••••••" type="password" required/>
+<button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300" id="togglePassword">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Error Message -->
+<div id="errorMessage" class="hidden text-sm text-red-500 px-2 py-2 bg-red-500 bg-opacity-10 rounded-lg"></div>
+<!-- Main CTA -->
+<button id="loginButton" class="w-full h-14 bg-primary text-white font-semibold text-lg rounded-full mt-2 hover:opacity-90 active:scale-[0.98] transition-all">
+                Entrar
+            </button>
+<!-- Divider -->
+<div class="flex items-center gap-4 my-6">
+<div class="h-[1px] flex-1 bg-gray-800"></div>
+<span class="text-xs font-medium text-gray-500 uppercase tracking-widest">ou continue com</span>
+<div class="h-[1px] flex-1 bg-gray-800"></div>
+</div>
+<!-- Social Auth Grid -->
+<div class="flex flex-col gap-3">
+<div class="grid grid-cols-3 gap-3">
+<button class="flex h-14 items-center justify-center rounded-full bg-white text-black hover:bg-gray-200 transition-colors">
+<svg class="w-6 h-6" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.702z"></path>
+</svg>
+</button>
+<button class="flex h-14 items-center justify-center rounded-full bg-[#1c1c1e] border border-gray-800 hover:bg-[#2c2c2e] transition-colors">
+<svg class="w-6 h-6" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+</button>
+<button class="flex h-14 items-center justify-center rounded-full bg-[#1877F2] hover:opacity-90 transition-colors">
+<svg class="w-7 h-7" fill="white" viewbox="0 0 24 24">
+<path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path>
+</svg>
+</button>
+</div>
+<button class="w-full h-14 bg-[#1c1c1e] border border-gray-800 text-white font-medium rounded-full flex items-center justify-center gap-3 hover:bg-[#2c2c2e] transition-colors">
+<span class="material-symbols-outlined text-primary">smartphone</span>
+                    Entrar com Telefone
+                </button>
+</div>
+</div>
+<!-- Footer -->
+<div class="mt-8 text-center">
+<p class="text-sm text-gray-500"> hover:underline" href="signup.html">Cadastre-se</a>
+</p>
+</div>
+
+<!-- Scripts -->
+<script type="module">
+import AuthService from '../js/auth.js';
+import { showToast, showLoading, hideLoading, validateEmail } from '../js/utils.js';
+
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
+const loginButton = document.getElementById('loginButton');
+const errorMessage = document.getElementById('errorMessage');
+const togglePassword = document.getElementById('togglePassword');
+
+// Toggle password visibility
+togglePassword.addEventListener('click', () => {
+  const type = passwordInput.type === 'password' ? 'text' : 'password';
+  passwordInput.type = type;
+});
+
+// Handle login form submission
+loginButton.addEventListener('click', async (e) => {
+  e.preventDefault();
+  
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
+
+  // Validate inputs
+  if (!email || !validateEmail(email)) {
+    showToast('Por favor, insira um email válido', 'error');
+    return;
+  }
+
+  if (!password || password.length < 8) {
+    showToast('A senha deve ter pelo menos 8 caracteres', 'error');
+    return;
+  }
+
+  try {
+    showLoading('Autenticando...');
+    loginButton.disabled = true;
+    errorMessage.classList.add('hidden');
+
+    await AuthService.login(email, password);
+    
+    hideLoading();
+    showToast('Login realizado com sucesso!', 'success');
+    
+    // Redirecionar baseado no role do usuário
+    const user = AuthService.getCurrentUser();
+    if (user.role === 'barber') {
+      window.location.href = 'barber-dashboard.html';
+    } else {
+      window.location.href = 'home.html';
+    }
+  } catch (error) {
+    hideLoading();
+    loginButton.disabled = false;
+    const message = error.message || 'Erro ao fazer login';
+    errorMessage.textContent = message;
+    errorMessage.classList.remove('hidden');
+    showToast(message, 'error');
+  }
+});
+
+// Allow Enter key to submit
+[emailInput, passwordInput].forEach(input => {
+  input.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') loginButton.click();
+  });
+});
+</script           <a class="text-primary font-semibold ml-1" href="#">Cadastre-se</a>
+</p>
+</div>
+</div>
+<!-- Hidden Map/Image components to satisfy instructions if needed -->
+<div class="hidden">
+<div class="w-full bg-center bg-no-repeat bg-cover" data-alt="abstract dark blue gradient pattern" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAuqwUOMMY1RaxUmOcNHMByIQ6Vj6kMqX3GAxntB0stUP_ndQJ8baAkHPKOpyP14dsRoOaGQ5G7FlPSiHtRQgF6KqYlyGMGPwqlms8wHZ-uQHJtHcD-LqhliOY-FZAGPnAjcJRtyRxRnGeqwqXv3rp2Kzr9Gsd9IpaU1TD_U0VIs-cDXUxuFnM_5efyJxLwf3b6FYKmRrUGYBrHHPibgiV0tNu7n3IknAdj9G4pl3UjXtzeimu1almpPUnoClZZ_XU2jEjjMHjV760");'></div>
+<div data-location="Cupertino" style="https://lh3.googleusercontent.com/aida-public/AB6AXuALUtsHKO2adPql5rOutN-IXulr7QWyZJwuihG43BdjgykNrlCgptsKanw5tl32fhDUSutoqZvutDY6ke97fbPriEGtitJX7qDm7SAABoNEEz9dozxNG8dAQoH448IfOFBjbf13ASrCo7jq9LkVVSbkTsd1XTqR9ZNgA9v0UeL09hWqP9Zr57Xl3prhVJEwY5TuB8eywVZ3ew0tva7wm4CVwv2i2a2G2F8cYDE-8H2RDnsz0H1njoIgtpcIm1AsjX_lI1xn23E4wZg"></div>
+</div>
+</body></html>

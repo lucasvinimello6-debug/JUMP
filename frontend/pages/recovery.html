@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JUMP - Recuperar Senha</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d59f2",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#000000",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "1.25rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .squircle-radius {
+            border-radius: 20px;
+        }
+        body {
+            background-color: #000000;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-dark font-display text-white antialiased">
+<div class="flex min-h-screen w-full flex-col items-center justify-between px-6 py-12">
+
+<!-- Header with Back Button -->
+<div class="w-full max-w-[400px] flex items-center gap-4 mb-8">
+<button class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-white">arrow_back</span>
+</button>
+<h1 class="text-lg font-semibold">Voltar</h1>
+</div>
+
+<!-- Main Content -->
+<div class="w-full max-w-[400px] flex flex-col gap-6">
+
+<!-- Logo -->
+<div class="flex flex-col items-center gap-2 mb-4">
+<div class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary">
+<span class="text-2xl font-black tracking-tighter">J</span>
+</div>
+<h1 class="text-2xl font-bold tracking-[0.2em] uppercase mt-2">Jump</h1>
+</div>
+
+<!-- Recovery Steps Container -->
+<div class="space-y-8">
+
+<!-- Step 1: Email Input -->
+<div class="step-1 space-y-4">
+<div class="space-y-2">
+<h2 class="text-2xl font-bold text-white">Esqueceu sua senha?</h2>
+<p class="text-sm text-gray-400">Sem problema! Digite seu e-mail e enviaremos um link para resetar.</p>
+</div>
+
+<div class="flex flex-col gap-1.5">
+<label class="px-1 text-sm font-medium text-gray-400">E-mail</label>
+<input class="w-full h-14 bg-[#1c1c1e] border border-gray-800 focus:border-primary focus:ring-1 focus:ring-primary text-white squircle-radius px-4 placeholder:text-gray-600 transition-all outline-none" placeholder="seu@email.com" type="email" id="email-input"/>
+</div>
+
+<button class="w-full h-14 bg-primary text-white font-semibold text-lg rounded-full hover:opacity-90 active:scale-[0.98] transition-all" id="send-btn">
+Enviar Link
+</button>
+</div>
+
+<!-- Step 2: Code Verification (Hidden by default) -->
+<div class="step-2 space-y-4 hidden">
+<div class="space-y-2">
+<h2 class="text-2xl font-bold text-white">Verifique seu e-mail</h2>
+<p class="text-sm text-gray-400">Enviamos um código de 6 dígitos para seu e-mail.</p>
+</div>
+
+<div class="flex flex-col gap-1.5">
+<label class="px-1 text-sm font-medium text-gray-400">Código de Verificação</label>
+<div class="flex gap-2 justify-center mb-4">
+<input class="w-12 h-12 bg-[#1c1c1e] border border-gray-800 focus:border-primary focus:ring-1 focus:ring-primary text-white squircle-radius text-center text-lg font-bold transition-all outline-none" placeholder="0" type="text" maxlength="1"/>
+<input class="w-12 h-12 bg-[#1c1c1e] border border-gray-800 focus:border-primary focus:ring-1 focus:ring-primary text-white squircle-radius text-center text-lg font-bold transition-all outline-none" placeholder="0" type="text" maxlength="1"/>
+<input class="w-12 h-12 bg-[#1c1c1e] border border-gray-800 focus:border-primary focus:ring-1 focus:ring-primary text-white squircle-radius text-center text-lg font-bold transition-all outline-none" placeholder="0" type="text" maxlength="1"/>
+<input class="w-12 h-12 bg-[#1c1c1e] border border-gray-800 focus:border-primary focus:ring-1 focus:ring-primary text-white squircle-radius text-center text-lg font-bold transition-all outline-none" placeholder="0" type="text" maxlength="1"/>
+<input class="w-12 h-12 bg-[#1c1c1e] border border-gray-800 focus:border-primary focus:ring-1 focus:ring-primary text-white squircle-radius text-center text-lg font-bold transition-all outline-none" placeholder="0" type="text" maxlength="1"/>
+<input class="w-12 h-12 bg-[#1c1c1e] border border-gray-800 focus:border-primary focus:ring-1 focus:ring-primary text-white squircle-radius text-center text-lg font-bold transition-all outline-none" placeholder="0" type="text" maxlength="1"/>
+</div>
+
+<div class="text-center text-sm text-gray-500">
+Não recebeu o código? <button class="text-primary font-medium hover:underline">Reenviar em 30s</button>
+</div>
+
+<button class="w-full h-14 bg-primary text-white font-semibold text-lg rounded-full hover:opacity-90 active:scale-[0.98] transition-all" id="verify-btn">
+Verificar
+</button>
+</div>
+
+<!-- Step 3: New Password -->
+<div class="step-3 space-y-4 hidden">
+<div class="space-y-2">
+<h2 class="text-2xl font-bold text-white">Criar nova senha</h2>
+<p class="text-sm text-gray-400">Escolha uma senha forte e segura.</p>
+</div>
+
+<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-1.5">
+<label class="px-1 text-sm font-medium text-gray-400">Nova Senha</label>
+<div class="relative">
+<input class="w-full h-14 bg-[#1c1c1e] border border-gray-800 focus:border-primary focus:ring-1 focus:ring-primary text-white squircle-radius px-4 pr-12 placeholder:text-gray-600 transition-all outline-none" placeholder="••••••••" type="password" id="new-password"/>
+<button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+<div class="text-xs text-gray-500 px-1 mt-1">Mínimo 8 caracteres, com letras e números</div>
+</div>
+
+<div class="flex flex-col gap-1.5">
+<label class="px-1 text-sm font-medium text-gray-400">Confirmar Senha</label>
+<div class="relative">
+<input class="w-full h-14 bg-[#1c1c1e] border border-gray-800 focus:border-primary focus:ring-1 focus:ring-primary text-white squircle-radius px-4 pr-12 placeholder:text-gray-600 transition-all outline-none" placeholder="••••••••" type="password" id="confirm-password"/>
+<button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+</div>
+
+<button class="w-full h-14 bg-primary text-white font-semibold text-lg rounded-full hover:opacity-90 active:scale-[0.98] transition-all" id="reset-btn">
+Resetar Senha
+</button>
+</div>
+
+<!-- Step 4: Success -->
+<div class="step-4 space-y-4 hidden text-center">
+<div class="flex justify-center mb-6">
+<div class="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-green-500">check_circle</span>
+</div>
+</div>
+
+<div class="space-y-2">
+<h2 class="text-2xl font-bold text-white">Senha redefinida!</h2>
+<p class="text-sm text-gray-400">Sua senha foi alterada com sucesso. Você pode fazer login agora.</p>
+</div>
+
+<button class="w-full h-14 bg-primary text-white font-semibold text-lg rounded-full hover:opacity-90 active:scale-[0.98] transition-all" id="login-btn">
+Ir para Login
+</button>
+</div>
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

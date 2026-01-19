@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>JUMP - Agendamentos de Barbershop</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  
+  <!-- Global App Initialization -->
+  <script type="module" src="./js/app.js"></script>
+  
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0d59f2",
+            "background-light": "#f5f6f8",
+            "background-dark": "#000000",
+          },
+          fontFamily: {
+            "display": ["Inter", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "1rem",
+            "lg": "1.25rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+  
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .squircle-radius {
+      border-radius: 20px;
+    }
+    body {
+      background-color: #000000;
+    }
+  </style>
+</head>
+<body class="bg-background-dark font-display text-white antialiased">
+  <div class="flex min-h-screen w-full flex-col items-center justify-center px-6">
+    <div class="text-center">
+      <div class="flex h-16 w-16 items-center justify-center rounded-3xl bg-primary mx-auto mb-4">
+        <span class="text-4xl font-black tracking-tighter">J</span>
+      </div>
+      <h1 class="text-4xl font-bold mb-2">JUMP</h1>
+      <p class="text-gray-400">Carregando...</p>
+      <div class="flex justify-center gap-1 mt-4">
+        <div class="w-2 h-2 bg-primary rounded-full animate-bounce" style="animation-delay: 0s;"></div>
+        <div class="w-2 h-2 bg-primary rounded-full animate-bounce" style="animation-delay: 0.2s;"></div>
+        <div class="w-2 h-2 bg-primary rounded-full animate-bounce" style="animation-delay: 0.4s;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Verificar autenticação e redirecionar
+    document.addEventListener('DOMContentLoaded', async () => {
+      const token = localStorage.getItem('authToken');
+      const user = localStorage.getItem('jumpUser');
+
+      if (token && user) {
+        // Usuário autenticado
+        const userData = JSON.parse(user);
+        if (userData.role === 'barber') {
+          window.location.href = 'pages/barber-dashboard.html';
+        } else {
+          window.location.href = 'pages/home.html';
+        }
+      } else {
+        // Usuário não autenticado
+        window.location.href = 'pages/welcome.html';
+      }
+    });
+  </script>
+</body>
+</html>
