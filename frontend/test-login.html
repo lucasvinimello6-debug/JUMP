@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>JUMP - Teste de Login</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+        body {
+            background-color: #000000;
+        }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-white antialiased">
+<div class="flex min-h-screen w-full flex-col items-center justify-center px-6 py-12">
+    <div class="w-full max-w-[400px] flex flex-col gap-8">
+        <div class="text-center">
+            <h1 class="text-3xl font-bold text-primary mb-2">JUMP SaaS</h1>
+            <p class="text-gray-400">Modo de Teste - Dados Mockados</p>
+        </div>
+
+        <div class="space-y-4">
+            <h2 class="text-lg font-semibold">Contas de Teste:</h2>
+            
+            <div class="bg-[#1c1c1e] p-4 rounded-lg">
+                <h3 class="font-semibold text-primary mb-2">👤 Cliente</h3>
+                <p class="text-sm text-gray-400">Email: <code class="text-white">cliente@test.com</code></p>
+                <p class="text-sm text-gray-400">Senha: <code class="text-white">teste123456</code></p>
+                <button onclick="loginAsClient()" class="w-full mt-3 h-12 bg-primary text-white font-semibold rounded-lg hover:opacity-90">
+                    Login como Cliente
+                </button>
+            </div>
+
+            <div class="bg-[#1c1c1e] p-4 rounded-lg">
+                <h3 class="font-semibold text-primary mb-2">✂️ Barbeiro</h3>
+                <p class="text-sm text-gray-400">Email: <code class="text-white">barbeiro@test.com</code></p>
+                <p class="text-sm text-gray-400">Senha: <code class="text-white">teste123456</code></p>
+                <button onclick="loginAsBarber()" class="w-full mt-3 h-12 bg-primary text-white font-semibold rounded-lg hover:opacity-90">
+                    Login como Barbeiro
+                </button>
+            </div>
+
+            <div class="bg-[#1c1c1e] p-4 rounded-lg">
+                <h3 class="font-semibold text-primary mb-2">📋 Criar Conta de Teste</h3>
+                <input type="text" id="testName" placeholder="Nome" class="w-full h-10 bg-[#2c2c2e] border border-gray-700 rounded-lg px-3 mb-2 text-white text-sm"/>
+                <input type="email" id="testEmail" placeholder="Email" class="w-full h-10 bg-[#2c2c2e] border border-gray-700 rounded-lg px-3 mb-2 text-white text-sm"/>
+                <input type="tel" id="testPhone" placeholder="Telefone" class="w-full h-10 bg-[#2c2c2e] border border-gray-700 rounded-lg px-3 mb-2 text-white text-sm"/>
+                <input type="password" id="testPassword" placeholder="Senha" class="w-full h-10 bg-[#2c2c2e] border border-gray-700 rounded-lg px-3 mb-3 text-white text-sm"/>
+                <button onclick="signupTest()" class="w-full h-10 bg-green-600 text-white font-semibold rounded-lg hover:opacity-90 text-sm">
+                    Criar Conta
+                </button>
+            </div>
+
+            <div class="bg-blue-900/20 border border-blue-500/30 p-4 rounded-lg">
+                <p class="text-sm text-blue-200">
+                    💡 <strong>Nota:</strong> Estas são contas mockadas no localStorage. Para testar com dados reais, 
+                    inicie o backend com <code class="text-white">npm start</code> na pasta backend.
+                </p>
+            </div>
+        </div>
+
+        <button onclick="clearStorage()" class="w-full h-12 bg-red-600 text-white font-semibold rounded-lg hover:opacity-90">
+            Limpar Dados Locais
+        </button>
+    </div>
+</div>
+
+<script>
+const mockUsers = {
+    'cliente@test.com': {
+        id: 'user-1',
+        name: 'João Cliente',
+        email: 'cliente@test.com',
+        phone: '11999999999',
+        role: 'client',
+        createdAt: new Date().toISOString()
+    },
+    'barbeiro@test.com': {
+        id: 'barber-1',
+        name: 'Maria Barbeira',
+        email: 'barbeiro@test.com',
+        phone: '11988888888',
+        role: 'barber',
+        createdAt: new Date().toISOString()
+    }
+};
+
+function loginAsClient() {
+    const user = mockUsers['cliente@test.com'];
+    localStorage.setItem('jumpUser', JSON.stringify(user));
+    localStorage.setItem('authToken', 'mock-token-' + Date.now());
+    window.location.href = 'pages/home.html';
+}
+
+function loginAsBarber() {
+    const user = mockUsers['barbeiro@test.com'];
+    localStorage.setItem('jumpUser', JSON.stringify(user));
+    localStorage.setItem('authToken', 'mock-token-' + Date.now());
+    window.location.href = 'pages/barber-dashboard.html';
+}
+
+function signupTest() {
+    const name = document.getElementById('testName').value.trim();
+    const email = document.getElementById('testEmail').value.trim();
+    const phone = document.getElementById('testPhone').value.trim();
+    const password = document.getElementById('testPassword').value.trim();
+
+    if (!name || !email || !phone || !password) {
+        alert('Preencha todos os campos');
+        return;
+    }
+
+    const user = {
+        id: 'user-' + Date.now(),
+        name: name,
+        email: email,
+        phone: phone,
+        role: 'client',
+        createdAt: new Date().toISOString()
+    };
+
+    localStorage.setItem('jumpUser', JSON.stringify(user));
+    localStorage.setItem('authToken', 'mock-token-' + Date.now());
+    
+    alert('✅ Conta criada com sucesso!');
+    window.location.href = 'pages/home.html';
+}
+
+function clearStorage() {
+    if (confirm('Tem certeza? Isso vai limpar todos os dados locais.')) {
+        localStorage.clear();
+        location.reload();
+    }
+}
+</script>
+</body>
+</html>

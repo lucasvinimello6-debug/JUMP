@@ -112,7 +112,7 @@
         <span class="material-symbols-outlined">calendar_month</span>
         <span class="text-xs">Agendamentos</span>
       </a>
-      <a href="profile.html" class="flex flex-col items-center gap-1 text-gray-400 hover:text-primary transition-colors">
+      <a href="my-profile.html" class="flex flex-col items-center gap-1 text-gray-400 hover:text-primary transition-colors">
         <span class="material-symbols-outlined">person</span>
         <span class="text-xs">Perfil</span>
       </a>
@@ -121,8 +121,12 @@
 
   <!-- Scripts -->
   <script type="module">
-    import { BarbershopApi } from '../js/api.js';
-    import { showToast, formatCurrency, formatPhone } from '../js/utils.js';
+    import { DemoAuthService, DemoBarbershopApi } from '../js/demo.js';
+    import { showToast } from '../js/utils.js';
+
+    if (!DemoAuthService.isAuthenticated()) {
+      window.location.href = 'login.html';
+    }
 
     const searchInput = document.getElementById('searchInput');
     const filterTabs = document.querySelectorAll('.filter-tab');
@@ -141,9 +145,7 @@
         barbershopsList.classList.add('hidden');
         emptyState.classList.add('hidden');
 
-        const response = await BarbershopApi.getBarbershops();
-        allBarbershops = response.barbershops || [];
-        
+        allBarbershops = await DemoBarbershopApi.getBarbershops();
         renderBarbershops();
       } catch (error) {
         console.error('Erro ao carregar barbearias:', error);

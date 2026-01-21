@@ -15,7 +15,7 @@ export const firebaseConfig = {
 
 // Backend API Configuration
 export const apiConfig = {
-  baseURL: process.env.API_URL || 'http://localhost:3000',
+  baseURL: 'http://localhost:3000',
   endpoints: {
     auth: {
       register: '/api/auth/register',

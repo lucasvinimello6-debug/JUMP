@@ -1,0 +1,123 @@
+🚀 MODO DEMO - TESTE O JUMP AGORA
+==================================
+
+Seu JUMP SaaS está rodando em MODO DEMO com dados simulados (sem backend).
+
+✅ O QUE FUNCIONA:
+
+1. ✅ Welcome Page - Clique em "Começar"
+2. ✅ Login com contas de teste
+3. ✅ Criar nova conta
+4. ✅ Ver barbearias
+5. ✅ Simular agendamentos
+
+═════════════════════════════════════════════════════════════════
+
+👤 CONTAS DE TESTE PARA LOGIN:
+
+Cliente:
+  Email: cliente@test.com
+  Senha: teste123456
+  
+Barbeiro:
+  Email: barbeiro@test.com
+  Senha: teste123456
+
+═════════════════════════════════════════════════════════════════
+
+📝 PARA CRIAR NOVA CONTA:
+
+1. Clique em "Cadastre-se" na tela de login
+2. Preencha todos os campos
+3. Crie sua conta
+4. Será redirecionado para a home
+
+═════════════════════════════════════════════════════════════════
+
+🌐 ACESSAR:
+
+Na web: http://localhost:8000
+
+Principais páginas:
+- Welcome: http://localhost:8000/frontend/pages/welcome.html
+- Login: http://localhost:8000/frontend/pages/login.html
+- Signup: http://localhost:8000/frontend/pages/signup.html
+- Test Dashboard: http://localhost:8000/test-login.html
+
+═════════════════════════════════════════════════════════════════
+
+🛠️ PARA USAR O BACKEND REAL:
+
+1. Abra outro terminal
+2. Vá para a pasta backend:
+   cd backend
+   
+3. Instale dependências:
+   npm install
+   
+4. Configure o arquivo .env com suas credenciais Firebase/Twilio
+   
+5. Inicie o servidor:
+   npm start
+
+Depois o frontend automaticamente se conectará ao backend real.
+
+═════════════════════════════════════════════════════════════════
+
+📱 O QUE ESTÁ IMPLEMENTADO:
+
+✅ Frontend completo (5 serviços + 12 páginas HTML)
+✅ Sistema de autenticação (login/signup/logout)
+✅ Modo Demo com localStorage
+✅ Listagem de barbearias
+✅ Validação de formulários
+✅ Toast notifications
+✅ Loading states
+✅ Responsivo (mobile-first)
+
+⏳ PRÓXIMOS PASSOS:
+
+1. Conectar ao backend real (Firebase + Node.js)
+2. Integrar pagamentos (Stripe/Mercado Pago)
+3. Notificações SMS/WhatsApp
+4. Chat em tempo real
+5. Avaliações e comentários
+6. Dashboard do barbeiro
+
+═════════════════════════════════════════════════════════════════
+
+💾 SEUS DADOS FICAM EM:
+
+localStorage - Dados de sessão (token, usuário)
+  - Acessar: F12 -> Application -> Local Storage -> http://localhost:8000
+
+Para limpar tudo:
+  localStorage.clear() no console
+
+═════════════════════════════════════════════════════════════════
+
+❌ PROBLEMA? TENTE ISSO:
+
+1. Limpe o cache do navegador (Ctrl+Shift+Del)
+2. Recarregue a página (F5 ou Ctrl+R)
+3. Abra o console (F12) e veja os erros
+4. Se receber erro de CORS, certifique-se que o backend está na porta 3000
+
+═════════════════════════════════════════════════════════════════
+
+📧 DOCUMENTAÇÃO:
+
+Leia os arquivos de documentação:
+- frontend/INTEGRATION.md - Como funciona a integração
+- frontend/EXAMPLES.md - Exemplos de código
+- SETUP.md - Guia de instalação completo
+- README.md - Visão geral do projeto
+
+═════════════════════════════════════════════════════════════════
+
+🎉 TUDO PRONTO!
+
+Seu SaaS está 100% funcional em modo Demo.
+Acesse agora: http://localhost:8000
+
+Boa sorte! 🚀

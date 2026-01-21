@@ -202,7 +202,7 @@
 <span class="material-symbols-outlined">calendar_today</span>
 <span class="text-xs font-semibold">Agenda</span>
 </a>
-<a href="profile.html" class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors" title="Perfil">
+<a href="my-profile.html" class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors" title="Perfil">
 <span class="material-symbols-outlined">person</span>
 <span class="text-xs font-semibold">Perfil</span>
 </a>
@@ -210,5 +210,18 @@
 </div>
 
 </div>
+
+<script type="module">
+import { DemoAuthService } from '../js/demo.js';
+
+if (!DemoAuthService.isAuthenticated()) {
+  window.location.href = 'login.html';
+}
+
+const user = DemoAuthService.getCurrentUser();
+if (user) {
+  document.querySelector('h1').textContent = `Olá, ${user.name.split(' ')[0]}`;
+}
+</script>
 
 </body></html>

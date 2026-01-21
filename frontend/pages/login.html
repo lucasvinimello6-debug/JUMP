@@ -128,7 +128,7 @@
 
 <!-- Scripts -->
 <script type="module">
-import AuthService from '../js/auth.js';
+import { DemoAuthService } from '../js/demo.js';
 import { showToast, showLoading, hideLoading, validateEmail } from '../js/utils.js';
 
 const emailInput = document.getElementById('email');
@@ -166,13 +166,12 @@ loginButton.addEventListener('click', async (e) => {
     loginButton.disabled = true;
     errorMessage.classList.add('hidden');
 
-    await AuthService.login(email, password);
+    const { user } = DemoAuthService.login(email, password);
     
     hideLoading();
     showToast('Login realizado com sucesso!', 'success');
     
     // Redirecionar baseado no role do usuário
-    const user = AuthService.getCurrentUser();
     if (user.role === 'barber') {
       window.location.href = 'barber-dashboard.html';
     } else {
@@ -194,7 +193,12 @@ loginButton.addEventListener('click', async (e) => {
     if (e.key === 'Enter') loginButton.click();
   });
 });
-</script           <a class="text-primary font-semibold ml-1" href="#">Cadastre-se</a>
+</script>
+
+<!-- Sign up link section -->
+<p class="mt-8 text-center text-sm text-gray-400">
+Não tem conta?
+<a class="text-primary font-semibold ml-1" href="signup.html">Cadastre-se</a>
 </p>
 </div>
 </div>

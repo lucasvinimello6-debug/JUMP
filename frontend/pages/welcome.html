@@ -85,7 +85,7 @@
                 </p>
 </div>
 <div class="space-y-6">
-<button class="group relative w-full h-[68px] bg-primary rounded-2xl flex items-center justify-center overflow-hidden transition-all active:scale-[0.98]">
+<button id="startButton" class="group relative w-full h-[68px] bg-primary rounded-2xl flex items-center justify-center overflow-hidden transition-all active:scale-[0.98]">
 <div class="absolute inset-0 shimmer opacity-30"></div>
 <span class="text-white text-[19px] font-semibold">Começar</span>
 <span class="material-icons-round ml-2 transition-transform group-hover:translate-x-1">arrow_forward</span>
@@ -109,5 +109,13 @@
 <div class="absolute top-[15%] -right-20 w-80 h-80 bg-primary/20 rounded-full blur-[100px] pointer-events-none"></div>
 <div class="absolute bottom-[5%] -left-20 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
 </div>
+
+<script>
+  // Evento do botão Começar
+  document.getElementById('startButton').addEventListener('click', function() {
+    // Redireciona para login
+    window.location.href = '../pages/login.html';
+  });
+</script>
 
 </body></html>

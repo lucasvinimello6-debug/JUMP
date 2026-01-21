@@ -69,6 +69,28 @@ class AuthService {
       return response;
     } catch (error) {
       console.error('Erro no signup:', error);
+      
+      // Modo mockado quando backend não está disponível
+      if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+        console.warn('⚠️ Backend não disponível. Usando modo teste com localStorage.');
+        
+        const mockUser = {
+          id: 'user-' + Date.now(),
+          name: userData.name,
+          email: userData.email,
+          phone: userData.phone,
+          role: userData.role || 'client',
+          createdAt: new Date().toISOString()
+        };
+
+        const mockToken = 'mock-token-' + Date.now();
+        new ApiService().setStoredToken(mockToken);
+        this.setStoredUser(mockUser);
+        this.notifyListeners('authChange', mockUser);
+
+        return { token: mockToken, user: mockUser };
+      }
+      
       throw error;
     }
   }
@@ -89,6 +111,44 @@ class AuthService {
       return response;
     } catch (error) {
       console.error('Erro no login:', error);
+      
+      // Modo mockado quando backend não está disponível
+      if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+        console.warn('⚠️ Backend não disponível. Usando modo teste com localStorage.');
+        
+        // Usuários de teste
+        const testUsers = {
+          'cliente@test.com': {
+            id: 'user-1',
+            name: 'João Cliente',
+            email: 'cliente@test.com',
+            phone: '11999999999',
+            role: 'client',
+            createdAt: new Date().toISOString()
+          },
+          'barbeiro@test.com': {
+            id: 'barber-1',
+            name: 'Maria Barbeira',
+            email: 'barbeiro@test.com',
+            phone: '11988888888',
+            role: 'barber',
+            createdAt: new Date().toISOString()
+          }
+        };
+
+        const user = testUsers[email];
+        if (!user || password !== 'teste123456') {
+          throw new Error('Email ou senha inválidos. Use as contas de teste em test-login.html');
+        }
+
+        const mockToken = 'mock-token-' + Date.now();
+        new ApiService().setStoredToken(mockToken);
+        this.setStoredUser(user);
+        this.notifyListeners('authChange', user);
+
+        return { token: mockToken, user: user };
+      }
+      
       throw error;
     }
   }

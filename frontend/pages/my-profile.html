@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>JUMP - Meu Perfil</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <style type="text/tailwindcss">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .squircle {
+      border-radius: 24px;
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#007AFF",
+          },
+        },
+      },
+    };
+  </script>
+</head>
+<body class="bg-gray-100 dark:bg-black text-gray-900 dark:text-white">
+<div class="w-full max-w-[390px] mx-auto min-h-screen bg-white dark:bg-black">
+  <!-- Header -->
+  <div class="px-6 py-6 flex items-center justify-between border-b border-gray-200 dark:border-gray-800">
+    <button id="backBtn" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-900">
+      <span class="material-symbols-outlined">arrow_back_ios_new</span>
+    </button>
+    <h1 class="text-xl font-bold">Meu Perfil</h1>
+    <div class="w-10"></div>
+  </div>
+
+  <!-- Profile Content -->
+  <main class="px-6 py-8 pb-32">
+    <!-- Avatar Section -->
+    <div class="flex flex-col items-center mb-8">
+      <div class="w-24 h-24 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center mb-4">
+        <span class="material-symbols-outlined text-5xl text-primary">account_circle</span>
+      </div>
+      <h2 id="userName" class="text-2xl font-bold">João Cliente</h2>
+      <p id="userEmail" class="text-gray-500 text-sm">cliente@test.com</p>
+    </div>
+
+    <!-- Profile Info -->
+    <div class="space-y-4 mb-8">
+      <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg">
+        <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Email</p>
+        <p id="profileEmail" class="font-semibold">cliente@test.com</p>
+      </div>
+
+      <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg">
+        <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Telefone</p>
+        <p id="profilePhone" class="font-semibold">11999999999</p>
+      </div>
+
+      <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg">
+        <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Membro desde</p>
+        <p id="profileDate" class="font-semibold">19 de Janeiro, 2026</p>
+      </div>
+    </div>
+
+    <!-- Options -->
+    <div class="space-y-3 mb-8">
+      <button class="w-full flex items-center gap-3 p-4 hover:bg-gray-50 dark:hover:bg-gray-900 rounded-lg transition-colors">
+        <span class="material-symbols-outlined text-gray-500">edit</span>
+        <span class="flex-1 text-left font-medium">Editar Perfil</span>
+        <span class="material-symbols-outlined text-gray-400">chevron_right</span>
+      </button>
+
+      <button class="w-full flex items-center gap-3 p-4 hover:bg-gray-50 dark:hover:bg-gray-900 rounded-lg transition-colors">
+        <span class="material-symbols-outlined text-gray-500">lock</span>
+        <span class="flex-1 text-left font-medium">Alterar Senha</span>
+        <span class="material-symbols-outlined text-gray-400">chevron_right</span>
+      </button>
+
+      <button class="w-full flex items-center gap-3 p-4 hover:bg-gray-50 dark:hover:bg-gray-900 rounded-lg transition-colors">
+        <span class="material-symbols-outlined text-gray-500">notifications</span>
+        <span class="flex-1 text-left font-medium">Notificações</span>
+        <span class="material-symbols-outlined text-gray-400">chevron_right</span>
+      </button>
+
+      <button class="w-full flex items-center gap-3 p-4 hover:bg-gray-50 dark:hover:bg-gray-900 rounded-lg transition-colors">
+        <span class="material-symbols-outlined text-gray-500">help</span>
+        <span class="flex-1 text-left font-medium">Ajuda e Suporte</span>
+        <span class="material-symbols-outlined text-gray-400">chevron_right</span>
+      </button>
+    </div>
+
+    <!-- Logout Button -->
+    <button id="logoutBtn" class="w-full bg-red-500 text-white py-3 rounded-lg font-semibold hover:bg-red-600 transition-colors">
+      Sair da Conta
+    </button>
+  </main>
+
+  <!-- Bottom Navigation -->
+  <div class="fixed bottom-0 left-0 right-0">
+    <nav class="glass-card border-t border-gray-200 dark:border-gray-800 max-w-[390px] mx-auto px-6 py-4 flex justify-between items-center bg-white dark:bg-black">
+      <a href="home.html" class="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+        <span class="material-symbols-outlined">home</span>
+        <span class="text-xs font-semibold">Home</span>
+      </a>
+      <a href="barbershops.html" class="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+        <span class="material-symbols-outlined">location_on</span>
+        <span class="text-xs font-semibold">Explorar</span>
+      </a>
+      <a href="my-appointments.html" class="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+        <span class="material-symbols-outlined">calendar_today</span>
+        <span class="text-xs font-semibold">Agenda</span>
+      </a>
+      <a href="my-profile.html" class="flex flex-col items-center gap-1 text-primary">
+        <span class="material-symbols-outlined">person</span>
+        <span class="text-xs font-semibold">Perfil</span>
+      </a>
+    </nav>
+  </div>
+</div>
+
+<script type="module">
+import { DemoAuthService } from '../js/demo.js';
+import { showToast } from '../js/utils.js';
+
+// Verificar autenticação
+if (!DemoAuthService.isAuthenticated()) {
+  window.location.href = 'login.html';
+}
+
+const user = DemoAuthService.getCurrentUser();
+
+// Preencher dados do usuário
+if (user) {
+  document.getElementById('userName').textContent = user.name;
+  document.getElementById('userEmail').textContent = user.email;
+  document.getElementById('profileEmail').textContent = user.email;
+  document.getElementById('profilePhone').textContent = user.phone;
+  document.getElementById('profileDate').textContent = new Date(user.createdAt).toLocaleDateString('pt-BR', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+
+// Voltar
+document.getElementById('backBtn').addEventListener('click', () => {
+  window.history.back();
+});
+
+// Logout
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  if (confirm('Tem certeza que deseja sair?')) {
+    DemoAuthService.logout();
+    showToast('Você foi desconectado', 'success');
+    setTimeout(() => {
+      window.location.href = 'login.html';
+    }, 1000);
+  }
+});
+</script>
+</body>
+</html>

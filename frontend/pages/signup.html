@@ -153,8 +153,8 @@ Já tem uma conta?
 
 <!-- Scripts -->
 <script type="module">
-import AuthService from '../js/auth.js';
-import { showToast, showLoading, hideLoading, validateEmail, validatePassword, formatPhone } from '../js/utils.js';
+import { DemoAuthService } from '../js/demo.js';
+import { showToast, showLoading, hideLoading, validateEmail, formatPhone } from '../js/utils.js';
 
 const nameInput = document.getElementById('name');
 const emailInput = document.getElementById('email');
@@ -209,7 +209,7 @@ signupButton.addEventListener('click', async (e) => {
     return;
   }
 
-  if (!validatePassword(password)) {
+  if (!password || password.length < 8) {
     showToast('A senha deve ter pelo menos 8 caracteres', 'error');
     return;
   }
@@ -229,7 +229,7 @@ signupButton.addEventListener('click', async (e) => {
     signupButton.disabled = true;
     errorMessage.classList.add('hidden');
 
-    await AuthService.signup({
+    const { user } = DemoAuthService.signup({
       name,
       email,
       phone,
