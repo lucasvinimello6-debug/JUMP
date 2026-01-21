@@ -1,351 +1,171 @@
 <!DOCTYPE html>
-<html class="light" lang="pt-BR"><head>
+<html class="light" lang="pt-br"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>JUMP - Meus Agendamentos</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<title>Meus Agendamentos - JUMP</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<style type="text/tailwindcss">
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        :root {
-            --primary-color: #007AFF;
-            --background-light: #F2F2F7;
-            --background-dark: #000000;
-            --card-light: #FFFFFF;
-            --card-dark: #1C1C1E;
-        }
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            -webkit-font-smoothing: antialiased;
-            min-height: 100dvh;
-        }
-        .squircle {
-            border-radius: 24px;
-        }
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        .ios-blur {
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        .dark .glass-card {
-            background: rgba(28, 28, 30, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .tab-active {
-            border-b-2 border-primary;
-            color: #007AFF;
-        }
-        .tab-inactive {
-            border-b-2 border-transparent;
-            color: rgb(148, 163, 184);
-        }
-    </style>
-<script>
+<script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        primary: "#007AFF",
-                        "background-light": "#F2F2F7",
-                        "background-dark": "#000000",
-                        "card-light": "#FFFFFF",
-                        "card-dark": "#1C1C1E",
+                        "primary": "#136dec",
+                        "background-light": "#f2f2f7",
+                        "background-dark": "#101822",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
                     },
                     borderRadius: {
-                        DEFAULT: "20px",
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
                     },
                 },
             },
-        };
+        }
     </script>
+<style type="text/tailwindcss">
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .dark .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .capsule-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+        .dark .capsule-nav {
+            background: rgba(28, 28, 30, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+    </style>
 <style>
     body {
       min-height: max(884px, 100dvh);
     }
   </style>
   </head>
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white flex justify-center items-center p-0">
-<div class="relative w-full max-w-[390px] min-h-screen bg-background-light dark:bg-background-dark overflow-hidden flex flex-col">
-
-<!-- Header -->
-<header class="px-6 py-6 flex items-center justify-between z-10 border-b border-black/5 dark:border-white/10">
+<body class="bg-background-light dark:bg-background-dark font-display min-h-screen text-[#111418] dark:text-white antialiased">
+<div class="sticky top-0 z-20 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="flex items-center p-6 pb-2 justify-between max-w-md mx-auto">
+<h1 class="text-3xl font-extrabold leading-tight tracking-tight">Meus Agendamentos</h1>
+<div class="size-10 rounded-full bg-white dark:bg-gray-800 flex items-center justify-center shadow-sm cursor-pointer hover:opacity-80 transition-opacity" id="profileBtn">
+<span class="material-symbols-outlined text-primary">person</span>
+</div>
+</div>
+</div>
+<main class="pb-32 max-w-md mx-auto">
+<section class="mt-4">
+<h3 class="text-[#617289] dark:text-gray-400 text-sm font-bold uppercase tracking-widest px-6 pb-4">Próximos</h3>
+<div class="px-4 flex flex-col gap-4" id="nextAppointments">
+<div class="glass-card rounded-xl p-5 flex flex-col gap-4 shadow-sm">
 <div class="flex items-center gap-4">
-<button class="flex h-10 w-10 items-center justify-center rounded-full bg-white/60 dark:bg-white/10 hover:bg-white/80 dark:hover:bg-white/20 transition-colors">
-<span class="material-symbols-outlined text-slate-900 dark:text-white">arrow_back_ios_new</span>
-</button>
-<h1 class="text-xl font-bold tracking-tight">Meus Agendamentos</h1>
-</div>
-</header>
-
-<!-- Tabs -->
-<div class="px-6 pt-6 pb-4 flex gap-8 border-b border-black/5 dark:border-white/10">
-<button class="tab-active font-semibold text-sm pb-3 transition-colors" id="upcoming-tab">
-Próximos
-</button>
-<button class="tab-inactive font-semibold text-sm pb-3 transition-colors" id="past-tab">
-Anteriores
-</button>
-</div>
-
-<!-- Main Content -->
-<main class="flex-1 overflow-y-auto hide-scrollbar px-6 pb-32">
-
-<!-- Upcoming Appointments Tab -->
-<div class="pt-6 space-y-4" id="upcoming-content">
-
-<!-- Appointment Card 1 -->
-<div class="bg-card-light dark:bg-card-dark border border-black/5 dark:border-white/10 squircle p-4 shadow-sm">
-<div class="flex items-start justify-between mb-4">
-<div class="flex gap-3 flex-1">
-<div class="w-14 h-14 rounded-full overflow-hidden border border-black/5 shrink-0">
-<img alt="Barbearia" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLZkynp2_uOpFhjLfx_RPL5R4YANuFix7hR-OAPJuj7FSVA2VGQVBKpqe8rHilAaw5tY_phaIAH0fel7__cxjqJZLEE7Ot8Sm2BtNLhQ748ggkQyUOjnVdoJovo3bS6Ug6yGLhbvT8hf0k-bVTe6N8Xl2ARQ7MDFV6eBKY64kNls48KqmavfRxWlPSwg28zhXSvfBlz6gAna2AEesyaeK_GXPeFbvk8dctzQTo-h192i6FajcOVFEyKOnB3b9NL2hsJJ900znPtdI"/>
-</div>
+<div class="size-14 rounded-full bg-cover bg-center ring-2 ring-primary/10" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB-m5CwC6TiBb8JFr4jDfYKcGt2mnujLFWAyf2tj9XwoM0eN7-UhUrIEB3SD2Qo_mH4dvotsbU9E9tKt4JGCloQ1Ct-w0sfqNID88h8uz9SMr25utTFSp4dlOij4MQGvs1bgkK_iSfQ15A_mSfmePWDwmaJlAhyqovgHRPCEAPruauM6OY57Tf-r8VFupgaOjexvVglrqKiL_MjDmA0HWGfN1k0QogE45upqQ8NmHaNYyX6y0DzE5XJIg7UMgFxgN1tVC9JjskrXiA');"></div>
 <div class="flex-1">
-<h3 class="font-bold text-slate-900 dark:text-white">Barbearia Premium</h3>
-<p class="text-sm text-slate-500 dark:text-slate-400">João Silva - Especialista</p>
-<div class="mt-2 flex items-center gap-1">
-<span class="inline-block w-2 h-2 rounded-full bg-green-500"></span>
-<span class="text-xs font-medium text-green-600 dark:text-green-400">Confirmado</span>
+<h4 class="text-lg font-bold leading-none mb-1">Barbearia Classic</h4>
+<p class="text-[#617289] dark:text-gray-400 text-sm font-medium">Barbeiro: Lucas Silva</p>
 </div>
 </div>
+<div class="flex items-center justify-between mt-2 pt-4 border-t border-black/5 dark:border-white/5">
+<div class="flex flex-col">
+<span class="text-primary font-bold text-base">15 Out, 14:30</span>
+<span class="text-xs text-[#617289] dark:text-gray-400">Em 3 dias</span>
 </div>
-<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">Em 2 dias</span>
-</div>
-
-<div class="space-y-2 mb-4 pb-4 border-b border-black/5 dark:border-white/10">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-sm">calendar_today</span>
-<span class="text-sm text-slate-700 dark:text-slate-200">12 de Maio às 10:00</span>
-</div>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-sm">content_cut</span>
-<span class="text-sm text-slate-700 dark:text-slate-200">Degradê + Barba</span>
-</div>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-sm">location_on</span>
-<span class="text-sm text-slate-700 dark:text-slate-200">Rua das Flores, 123</span>
+<button class="bg-[#f0f2f4] dark:bg-white/10 text-[#111418] dark:text-white px-5 py-2 rounded-full text-sm font-bold transition-active active:scale-95">
+                        Gerenciar
+                    </button>
 </div>
 </div>
-
-<div class="flex gap-2">
-<button class="flex-1 bg-primary text-white py-2 squircle font-semibold text-sm active:scale-95 transition-transform">Editar</button>
-<button class="flex-1 bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white py-2 squircle font-semibold text-sm active:scale-95 transition-transform">Cancelar</button>
-</div>
-</div>
-
-<!-- Appointment Card 2 -->
-<div class="bg-card-light dark:bg-card-dark border border-black/5 dark:border-white/10 squircle p-4 shadow-sm">
-<div class="flex items-start justify-between mb-4">
-<div class="flex gap-3 flex-1">
-<div class="w-14 h-14 rounded-full overflow-hidden border border-black/5 shrink-0">
-<img alt="Barbearia" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLZkynp2_uOpFhjLfx_RPL5R4YANuFix7hR-OAPJuj7FSVA2VGQVBKpqe8rHilAaw5tY_phaIAH0fel7__cxjqJZLEE7Ot8Sm2BtNLhQ748ggkQyUOjnVdoJovo3bS6Ug6yGLhbvT8hf0k-bVTe6N8Xl2ARQ7MDFV6eBKY64kNls48KqmavfRxWlPSwg28zhXSvfBlz6gAna2AEesyaeK_GXPeFbvk8dctzQTo-h192i6FajcOVFEyKOnB3b9NL2hsJJ900znPtdI"/>
-</div>
+<div class="glass-card rounded-xl p-5 flex flex-col gap-4 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="size-14 rounded-full bg-cover bg-center ring-2 ring-primary/10" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDSGkp9Lzw6Ytxvjbm97Dtm0Y5gV-Xq2R_Z8YFXQERJ8mMUWVssjRjV89IOOUm8aTlwWxzvEvXW-Yp1Impx1Hk-6LjyplKlh72_Kzoeh2ZYv8_Q3ScxaoBUHl4XYufjgFINQ1NbiezkQTCxWtVrTgCcDrFA4Coz7eHLoQ9sodU4b5RJdip8q8Z5hkDvNXDD_gA2gipC5inHPeQFhXSUHexZT7_X4ZqtkWW39SR4iE7XWjA_YFxoX-GTIMCI_opiIUvn4A95w3qI8Nw');"></div>
 <div class="flex-1">
-<h3 class="font-bold text-slate-900 dark:text-white">Studio Barber</h3>
-<p class="text-sm text-slate-500 dark:text-slate-400">Carlos Santos</p>
-<div class="mt-2 flex items-center gap-1">
-<span class="inline-block w-2 h-2 rounded-full bg-yellow-500"></span>
-<span class="text-xs font-medium text-yellow-600 dark:text-yellow-400">Pendente</span>
+<h4 class="text-lg font-bold leading-none mb-1">Modern Cut</h4>
+<p class="text-[#617289] dark:text-gray-400 text-sm font-medium">Barbeiro: Matheus Oliveira</p>
 </div>
 </div>
+<div class="flex items-center justify-between mt-2 pt-4 border-t border-black/5 dark:border-white/5">
+<div class="flex flex-col">
+<span class="text-primary font-bold text-base">22 Out, 10:00</span>
+<span class="text-xs text-[#617289] dark:text-gray-400">Em 10 dias</span>
 </div>
-<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">Em 8 dias</span>
-</div>
-
-<div class="space-y-2 mb-4 pb-4 border-b border-black/5 dark:border-white/10">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-sm">calendar_today</span>
-<span class="text-sm text-slate-700 dark:text-slate-200">18 de Maio às 14:30</span>
-</div>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-sm">content_cut</span>
-<span class="text-sm text-slate-700 dark:text-slate-200">Corte Clássico</span>
-</div>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-sm">location_on</span>
-<span class="text-sm text-slate-700 dark:text-slate-200">Av. Paulista, 1000</span>
+<button class="bg-[#f0f2f4] dark:bg-white/10 text-[#111418] dark:text-white px-5 py-2 rounded-full text-sm font-bold transition-active active:scale-95">
+                        Gerenciar
+                    </button>
 </div>
 </div>
-
-<div class="flex gap-2">
-<button class="flex-1 bg-primary text-white py-2 squircle font-semibold text-sm active:scale-95 transition-transform">Editar</button>
-<button class="flex-1 bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white py-2 squircle font-semibold text-sm active:scale-95 transition-transform">Cancelar</button>
+</section>
+<section class="mt-10">
+<h3 class="text-[#617289] dark:text-gray-400 text-sm font-bold uppercase tracking-widest px-6 pb-4">Histórico</h3>
+<div class="px-4 flex flex-col gap-3 opacity-80" id="historyAppointments">
+<div class="glass-card rounded-xl p-4 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-3">
+<div class="size-12 rounded-full bg-cover bg-center grayscale" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCzb7PBg2juPEuzv1bXgQYIoTiF5BMT6_XsWdApg6YeXS53Z1G5HJ2Bgv5P79DZf15cOd4m4LLf-lpCfufSyVdGNml8Hpzhf1MfvBCO4kyit3VCi0ffexxrv3RkOoQUpoPLAG9Rn_O8gWvp4nujfwrCH0HuJ4O19F3ARu4-JoYYK0mWUmmr8zeX6RsQuw8liNXJdGqy9HAkUSR4qGBTa8orjR06j9DCmcVXyFev6GT7rFocg_TuFUFdV4kKSzNmVUlJu6iPXnPIIL0');"></div>
+<div class="flex flex-col">
+<h4 class="text-sm font-bold">Barbearia Classic</h4>
+<p class="text-[#617289] text-xs">28 Set, 16:00 • Concluído</p>
 </div>
 </div>
-
-<!-- Appointment Card 3 -->
-<div class="bg-card-light dark:bg-card-dark border border-black/5 dark:border-white/10 squircle p-4 shadow-sm">
-<div class="flex items-start justify-between mb-4">
-<div class="flex gap-3 flex-1">
-<div class="w-14 h-14 rounded-full overflow-hidden border border-black/5 shrink-0">
-<img alt="Barbearia" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLZkynp2_uOpFhjLfx_RPL5R4YANuFix7hR-OAPJuj7FSVA2VGQVBKpqe8rHilAaw5tY_phaIAH0fel7__cxjqJZLEE7Ot8Sm2BtNLhQ748ggkQyUOjnVdoJovo3bS6Ug6yGLhbvT8hf0k-bVTe6N8Xl2ARQ7MDFV6eBKY64kNls48KqmavfRxWlPSwg28zhXSvfBlz6gAna2AEesyaeK_GXPeFbvk8dctzQTo-h192i6FajcOVFEyKOnB3b9NL2hsJJ900znPtdI"/>
+<span class="material-symbols-outlined text-[#617289]">chevron_right</span>
 </div>
-<div class="flex-1">
-<h3 class="font-bold text-slate-900 dark:text-white">Barbearia Central</h3>
-<p class="text-sm text-slate-500 dark:text-slate-400">Pedro Costa</p>
-<div class="mt-2 flex items-center gap-1">
-<span class="inline-block w-2 h-2 rounded-full bg-green-500"></span>
-<span class="text-xs font-medium text-green-600 dark:text-green-400">Confirmado</span>
+<div class="glass-card rounded-xl p-4 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-3">
+<div class="size-12 rounded-full bg-cover bg-center grayscale" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBdbuEbfhfglvjfGbQfhaRHc3lnTmCj80agrmWmYKQ09YBQYl9QRUhEczFhauemdFG1C9NJaoVRtjl1fsLqtX_EPTQzQhEGGyiZ5OE-GIa3BQndSV543eXnBjiEk5CGJnMMzUbka79kz8e0K-yXF2Fnt06ERl55LtN8kII7H-pLPAp2t8P44p8cPpszrkZFutWQTIDl5oxy6IkMkPa1M940qLQtHNkK6bwYBd3SUIcFfGObxcIp5Ryg82ciWlXSULV-lubhtmGqXUg');"></div>
+<div class="flex flex-col">
+<h4 class="text-sm font-bold">The Gent's Room</h4>
+<p class="text-[#617289] text-xs">10 Set, 09:00 • Concluído</p>
 </div>
 </div>
+<span class="material-symbols-outlined text-[#617289]">chevron_right</span>
 </div>
-<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">Em 15 dias</span>
-</div>
-
-<div class="space-y-2 mb-4 pb-4 border-b border-black/5 dark:border-white/10">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-sm">calendar_today</span>
-<span class="text-sm text-slate-700 dark:text-slate-200">25 de Maio às 11:00</span>
-</div>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-sm">content_cut</span>
-<span class="text-sm text-slate-700 dark:text-slate-200">Corte + Aparador</span>
-</div>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-sm">location_on</span>
-<span class="text-sm text-slate-700 dark:text-slate-200">Rua XV de Novembro, 500</span>
-</div>
-</div>
-
-<div class="flex gap-2">
-<button class="flex-1 bg-primary text-white py-2 squircle font-semibold text-sm active:scale-95 transition-transform">Editar</button>
-<button class="flex-1 bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white py-2 squircle font-semibold text-sm active:scale-95 transition-transform">Cancelar</button>
-</div>
-</div>
-
-</div>
-
-<!-- Past Appointments Tab -->
-<div class="pt-6 space-y-4 hidden" id="past-content">
-
-<!-- Past Appointment Card 1 -->
-<div class="bg-card-light dark:bg-card-dark border border-black/5 dark:border-white/10 squircle p-4 shadow-sm opacity-75">
-<div class="flex items-start justify-between mb-4">
-<div class="flex gap-3 flex-1">
-<div class="w-14 h-14 rounded-full overflow-hidden border border-black/5 shrink-0">
-<img alt="Barbearia" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLZkynp2_uOpFhjLfx_RPL5R4YANuFix7hR-OAPJuj7FSVA2VGQVBKpqe8rHilAaw5tY_phaIAH0fel7__cxjqJZLEE7Ot8Sm2BtNLhQ748ggkQyUOjnVdoJovo3bS6Ug6yGLhbvT8hf0k-bVTe6N8Xl2ARQ7MDFV6eBKY64kNls48KqmavfRxWlPSwg28zhXSvfBlz6gAna2AEesyaeK_GXPeFbvk8dctzQTo-h192i6FajcOVFEyKOnB3b9NL2hsJJ900znPtdI"/>
-</div>
-<div class="flex-1">
-<h3 class="font-bold text-slate-900 dark:text-white">Barbearia Premium</h3>
-<p class="text-sm text-slate-500 dark:text-slate-400">João Silva</p>
-<div class="mt-2 flex items-center gap-1">
-<span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>
-<span class="text-xs font-medium text-green-600 dark:text-green-400">Realizado</span>
-</div>
-</div>
-</div>
-<span class="px-3 py-1 bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-bold rounded-full">5 de Maio</span>
-</div>
-
-<div class="space-y-2 mb-4 pb-4 border-b border-black/5 dark:border-white/10">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-slate-400 text-sm">calendar_today</span>
-<span class="text-sm text-slate-600 dark:text-slate-300">5 de Maio às 09:00</span>
-</div>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-slate-400 text-sm">content_cut</span>
-<span class="text-sm text-slate-600 dark:text-slate-300">Corte na Tesoura</span>
-</div>
-</div>
-
-<div class="flex gap-2">
-<button class="flex-1 bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white py-2 squircle font-semibold text-sm active:scale-95 transition-transform">Agendar Novamente</button>
-<button class="flex-1 text-primary py-2 squircle font-semibold text-sm active:scale-95 transition-transform">Avaliar</button>
-</div>
-</div>
-
-<!-- Past Appointment Card 2 -->
-<div class="bg-card-light dark:bg-card-dark border border-black/5 dark:border-white/10 squircle p-4 shadow-sm opacity-75">
-<div class="flex items-start justify-between mb-4">
-<div class="flex gap-3 flex-1">
-<div class="w-14 h-14 rounded-full overflow-hidden border border-black/5 shrink-0">
-<img alt="Barbearia" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLZkynp2_uOpFhjLfx_RPL5R4YANuFix7hR-OAPJuj7FSVA2VGQVBKpqe8rHilAaw5tY_phaIAH0fel7__cxjqJZLEE7Ot8Sm2BtNLhQ748ggkQyUOjnVdoJovo3bS6Ug6yGLhbvT8hf0k-bVTe6N8Xl2ARQ7MDFV6eBKY64kNls48KqmavfRxWlPSwg28zhXSvfBlz6gAna2AEesyaeK_GXPeFbvk8dctzQTo-h192i6FajcOVFEyKOnB3b9NL2hsJJ900znPtdI"/>
-</div>
-<div class="flex-1">
-<h3 class="font-bold text-slate-900 dark:text-white">Studio Barber</h3>
-<p class="text-sm text-slate-500 dark:text-slate-400">Carlos Santos</p>
-<div class="mt-2 flex items-center gap-1">
-<span class="material-symbols-outlined text-red-500 text-sm">cancel</span>
-<span class="text-xs font-medium text-red-600 dark:text-red-400">Cancelado</span>
-</div>
-</div>
-</div>
-<span class="px-3 py-1 bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-bold rounded-full">28 de Abril</span>
-</div>
-
-<div class="space-y-2 mb-4 pb-4 border-b border-black/5 dark:border-white/10">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-slate-400 text-sm">calendar_today</span>
-<span class="text-sm text-slate-600 dark:text-slate-300">28 de Abril às 10:00</span>
-</div>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-slate-400 text-sm">content_cut</span>
-<span class="text-sm text-slate-600 dark:text-slate-300">Degradê</span>
-</div>
-</div>
-
-<div class="flex gap-2">
-<button class="flex-1 bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white py-2 squircle font-semibold text-sm active:scale-95 transition-transform">Agendar Novamente</button>
-</div>
-</div>
-
-</div>
-
+</section>
 </main>
-
-<!-- Bottom Navigation -->
-<div class="fixed bottom-0 left-0 right-0 z-50">
-<nav class="glass-card ios-blur border-t border-black/5 dark:border-white/10 max-w-[390px] mx-auto px-6 py-4 flex justify-between items-center">
-<a href="home.html" class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors" title="Home">
-<span class="material-symbols-outlined">home</span>
-<span class="text-xs font-semibold">Home</span>
+<div class="fixed bottom-8 left-0 right-0 z-50 flex justify-center px-6">
+<nav class="capsule-nav h-[68px] w-full max-w-[340px] rounded-full flex items-center justify-around px-2">
+<a href="home.html" class="flex flex-col items-center justify-center gap-0.5 w-16 h-12 text-gray-400 active:scale-90 transition-transform hover:text-primary">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Início</span>
 </a>
-<a href="barbershops.html" class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors" title="Explorar">
-<span class="material-symbols-outlined">location_on</span>
-<span class="text-xs font-semibold">Explorar</span>
+<a href="barbershops.html" class="flex flex-col items-center justify-center gap-0.5 w-16 h-12 text-gray-400 active:scale-90 transition-transform hover:text-primary">
+<span class="material-symbols-outlined text-[24px]">search</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Buscar</span>
 </a>
-<a href="#" class="flex flex-col items-center gap-1 text-primary" title="Agendamentos">
-<span class="material-symbols-outlined">calendar_today</span>
-<span class="text-xs font-semibold">Agenda</span>
+<a href="my-appointments.html" class="flex flex-col items-center justify-center gap-0.5 w-16 h-12 text-primary active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[24px] fill-current">calendar_month</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Agendas</span>
 </a>
-<a href="profile.html" class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors" title="Perfil">
-<span class="material-symbols-outlined">person</span>
-<span class="text-xs font-semibold">Perfil</span>
+<a href="my-profile.html" class="flex flex-col items-center justify-center gap-0.5 w-16 h-12 text-gray-400 active:scale-90 transition-transform hover:text-primary">
+<span class="material-symbols-outlined text-[24px]">account_circle</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Perfil</span>
 </a>
 </nav>
 </div>
 
-</div>
+<script type="module">
+import { DemoAuthService } from '../js/demo.js';
 
-<script>
-// Tab switching logic
-document.getElementById('upcoming-tab').addEventListener('click', function() {
-  document.getElementById('upcoming-content').classList.remove('hidden');
-  document.getElementById('past-content').classList.add('hidden');
-  document.getElementById('upcoming-tab').classList.add('tab-active');
-  document.getElementById('upcoming-tab').classList.remove('tab-inactive');
-  document.getElementById('past-tab').classList.remove('tab-active');
-  document.getElementById('past-tab').classList.add('tab-inactive');
-});
+if (!DemoAuthService.isAuthenticated()) {
+  window.location.href = 'login.html';
+}
 
-document.getElementById('past-tab').addEventListener('click', function() {
-  document.getElementById('past-content').classList.remove('hidden');
-  document.getElementById('upcoming-content').classList.add('hidden');
-  document.getElementById('past-tab').classList.add('tab-active');
-  document.getElementById('past-tab').classList.remove('tab-inactive');
-  document.getElementById('upcoming-tab').classList.remove('tab-active');
-  document.getElementById('upcoming-tab').classList.add('tab-inactive');
+document.getElementById('profileBtn').addEventListener('click', () => {
+  window.location.href = 'my-profile.html';
 });
 </script>
 
