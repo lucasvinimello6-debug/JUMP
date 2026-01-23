@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #000000;
+  --color-foreground: #ffffff;
+
+  --color-primary: #0d59f2;
+  --color-primary-foreground: #ffffff;
+
+  --color-card: #1c1c1e;
+  --color-card-foreground: #ffffff;
+
+  --color-popover: #1c1c1e;
+  --color-popover-foreground: #ffffff;
+
+  --color-muted: #2c2c2e;
+  --color-muted-foreground: #9ca3af;
+
+  --color-accent: #2c2c2e;
+  --color-accent-foreground: #ffffff;
+
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+
+  --color-border: #1f2937;
+  --color-input: #1f2937;
+  --color-ring: #0d59f2;
+
+  --radius-lg: 1.25rem;
+  --radius-md: 1rem;
+  --radius-sm: 0.5rem;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    @apply antialiased;
+  }
+}
+
+@layer utilities {
+  .squircle-radius {
+    border-radius: 20px;
+  }
+
+  .segmented-control {
+    background-color: #1c1c1e;
+    padding: 2px;
+    border-radius: 12px;
+  }
+
+  .segmented-item {
+    flex: 1;
+    text-align: center;
+    padding: 8px 0;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.2s;
+  }
+
+  .segmented-item.active {
+    background-color: #3a3a3c;
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .segmented-item.inactive {
+    color: #8e8e93;
+  }
+}
